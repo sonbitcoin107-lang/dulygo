@@ -2,8 +2,14 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import rules from '../data/phonics/rules_60.json';
+import mouthShapesData from '../data/phonics/mouth_shapes.json';
 import { speakText } from '../utils/speech';
 import './PhonicsLesson.css';
+
+const allShapes = [
+  ...mouthShapesData.mouth_shapes_guide.vowels_and_diphthongs,
+  ...mouthShapesData.mouth_shapes_guide.consonants
+];
 
 // Component to highlight pattern in a word
 const HighlightPattern = ({ word, pattern }) => {
@@ -28,6 +34,7 @@ export default function PhonicsLesson() {
   const navigate = useNavigate();
   
   const rule = rules.find((r) => r.id === parseInt(id));
+  const mouthShape = rule ? allShapes.find(s => s.ipa === rule.sound || s.ipa === rule.sound.replace(':', 'ː')) : null;
 
   if (!rule) {
     return (
@@ -77,6 +84,26 @@ export default function PhonicsLesson() {
             </div>
           </div>
         </div>
+
+        {/* Mouth Shape Card */}
+        {mouthShape && (
+          <div className="mouth-shape-card">
+            <div className="mouth-card-header">
+              <span className="mouth-icon">👄</span> KHẨU HÌNH MIỆNG
+            </div>
+            <div className="mouth-card-body">
+              <div className="kid-tip"><strong>💡 Mẹo:</strong> {mouthShape.kid_tip}</div>
+              <div className="steps-list">
+                <div className="step-item"><strong>💋 Môi:</strong> {mouthShape.steps.lips}</div>
+                <div className="step-item"><strong>🦷 Răng:</strong> {mouthShape.steps.teeth}</div>
+                <div className="step-item"><strong>👅 Lưỡi:</strong> {mouthShape.steps.tongue}</div>
+              </div>
+              <div className="mistake-alert">
+                <strong>⚠️ Tránh lỗi này:</strong> {mouthShape.vietnamese_mistake}
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="examples-divider">
           <div className="line"></div>

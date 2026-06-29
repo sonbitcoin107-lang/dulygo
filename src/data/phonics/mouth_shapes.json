@@ -1,0 +1,218 @@
+{
+  "mouth_shapes_guide": {
+    "vowels_and_diphthongs": [
+      {
+        "ipa": "/oʊ/",
+        "vietnamese_analogy": "Tròn miệng nói 'Ô' rồi thu nhỏ môi thành 'U'",
+        "kid_tip": "Con hãy làm giống như đang ngạc nhiên mở miệng to nói 'Ô', rồi nhanh chóng thu nhỏ môi lại thành chữ 'U' thật nhanh nhé! -> 'Ô-u'!",
+        "steps": {
+          "lips": "Bắt đầu mở tròn vừa phải, sau đó chu tròn xoe thu nhỏ dần và nhô nhẹ ra phía trước.",
+          "teeth": "Hai hàm răng tách xa nhau lúc đầu, sau đó khép lại gần nhau hơn.",
+          "tongue": "Phần gốc lưỡi hơi nâng nhẹ lên về phía sau khoang miệng."
+        },
+        "vietnamese_mistake": "Trẻ em Việt Nam hay đọc thành âm 'ô' phẳng lì (như 'coat' đọc thành 'cốt', 'boat' đọc thành 'bốt') -> Làm mất đi phần đuôi '/ʊ/' kéo dài tròn môi.",
+        "animation_prompt": "A cute cartoon dinosaur character starting with a moderately open round mouth, transitioning smoothly to a tightly puckered, small circular mouth as if whispering a secret."
+      },
+      {
+        "ipa": "/eɪ/",
+        "vietnamese_analogy": "Cười tươi nói 'Ê' rồi khép môi thành 'i'",
+        "kid_tip": "Con hãy cười thật tươi giống như đang chuẩn bị ăn kẹo ngọt, nói chữ 'Ê' rồi khép nhẹ miệng lại thành chữ 'i' thật mượt mà nha! -> 'Ê-i'!",
+        "steps": {
+          "lips": "Hai khóe miệng kéo rộng sang hai bên (tư thế mỉm cười nhẹ), sau đó dẹt dần và khép nhỏ lại theo chiều dọc.",
+          "teeth": "Hai hàm răng khép lại gần nhau nhưng không chạm nhau.",
+          "tongue": "Lưỡi nâng cao dần lên phía trên và hướng ra phía trước vòm họng."
+        },
+        "vietnamese_mistake": "Trẻ em hay đọc thành âm 'ê' của tiếng Việt (như 'rain' đọc thành 'rên', 'cake' đọc thành 'kếch') -> Làm mất đi độ căng của khuôn miệng mỉm cười.",
+        "animation_prompt": "A cute cartoon puppy character smiling widely with corners of the mouth pulled back, then raising its jaw slightly to close the mouth into a sweet grin."
+      },
+      {
+        "ipa": "/ɔː/",
+        "vietnamese_analogy": "Môi tròn xoe như quả trứng gà",
+        "kid_tip": "Hãy làm môi tròn xoe giống như một quả trứng đứng dọc, rồi phát ra âm 'O' kéo dài thật to như tiếng còi tàu phun khói nhé! -> 'Oooo'!",
+        "steps": {
+          "lips": "Môi tròn chặt, mở rộng theo chiều dọc để tạo thành hình bầu dục đứng. Môi hơi nhô ra phía trước.",
+          "teeth": "Hai hàm răng tách rộng ra đáng kể.",
+          "tongue": "Lưỡi rụt sâu về phía sau họng và hạ thấp hẳn xuống dưới sàn miệng."
+        },
+        "vietnamese_mistake": "Thường đọc thành âm 'o' ngắn hoặc âm 'ô' của tiếng Việt (như 'water' đọc thành 'oá-tờ') -> Thiếu độ sâu trong cổ họng và độ kéo dài của âm.",
+        "animation_prompt": "A happy cartoon kitten with its mouth opened vertically in a tall, perfect oval shape, showing a wide open throat with the tongue resting low."
+      },
+      {
+        "ipa": "/aɪ/",
+        "vietnamese_analogy": "Há to miệng 'A' rồi cười mỉm 'i'",
+        "kid_tip": "Giống như lúc con đi khám bác sĩ bảo mở to miệng nói 'A', rồi con mỉm cười khép miệng nói 'i' thật nhanh nhé! -> 'A-i'!",
+        "steps": {
+          "lips": "Bắt đầu bằng việc mở miệng rất to và thoải mái (hạ cằm dưới xuống tối đa), sau đó mỉm cười kéo căng khóe miệng sang hai bên.",
+          "teeth": "Răng tách cực rộng lúc đầu, sau đó khép sát lại gần nhau khi kết thúc âm.",
+          "tongue": "Lưỡi nằm phẳng ở sàn miệng lúc đầu, sau đó nâng vần thân lưỡi lên cao sát vòm họng."
+        },
+        "vietnamese_mistake": "Hay đọc thành âm 'ai' ngắn dẹt của tiếng Việt (như 'nice' đọc thành 'nai' cụt lủn) -> Làm âm nghe bị mỏng và không có độ ngân vang.",
+        "animation_prompt": "A playful cartoon bunny dropping its jaw down extremely low for a wide open 'ah' sound, then instantly snapping into a wide, toothy smile."
+      },
+      {
+        "ipa": "/iː/",
+        "vietnamese_analogy": "Cười toe toét khi chụp ảnh 'Say cheese!'",
+        "kid_tip": "Con hãy cười thật tươi hết cỡ giống như khi bố mẹ bảo chụp ảnh 'Say cheese!', giữ nụ cười thật lâu và kéo dài hơi âm 'Iiii' ra nhé!",
+        "steps": {
+          "lips": "Hai khóe miệng kéo căng hết mức sang hai bên tai, môi dẹt và mỏng.",
+          "teeth": "Hai hàm răng khép gần sát vào nhau (chỉ hở một khe cực nhỏ để hơi đi ra).",
+          "tongue": "Thân lưỡi nâng lên rất cao sát vòm họng trên, đầu lưỡi chạm nhẹ vào mặt sau của hàm răng cửa dưới."
+        },
+        "vietnamese_mistake": "Hay đọc thành âm 'i' ngắn và lỏng cơ miệng của tiếng Việt (như 'deep' đọc thành 'đíp') -> Thiếu độ căng cơ môi và độ dài hơi chuẩn.",
+        "animation_prompt": "An adorable cartoon panda with an ultra-wide, cheek-to-cheek grin, eyes closed in happiness, showcasing top and bottom teeth close together."
+      },
+      {
+        "ipa": "/æ/",
+        "vietnamese_analogy": "Há miệng rộng ăn quả táo to",
+        "kid_tip": "Con hãy tưởng tượng trước mặt có một quả táo đỏ khổng lồ siêu ngon, con mở to miệng cả chiều dọc lẫn chiều ngang để cắn một miếng thật to nào! -> 'A-e'!",
+        "steps": {
+          "lips": "Miệng mở rộng hết cỡ về cả chiều dọc và chiều ngang, hai khóe miệng hơi căng nhẹ ra sau.",
+          "teeth": "Hai hàm răng tách xa nhau hoàn toàn.",
+          "tongue": "Lưỡi hạ rất thấp ở phía trước, đầu lưỡi đè chặt vào mặt sau của hàm răng dưới."
+        },
+        "vietnamese_mistake": "Trẻ hay bị đọc lẫn lộn thành âm 'a' tiếng Việt (như 'cat' đọc thành 'cát') hoặc âm 'e' (như 'cat' đọc thành 'két') -> Thiếu độ mở rộng của hàm.",
+        "animation_prompt": "A cute monster character opening its mouth incredibly wide in a square-like shape, biting down on an imaginary giant fruit."
+      },
+      {
+        "ipa": "/ʌ/",
+        "vietnamese_analogy": "Âm 'Á' giật mình ngơ ngác",
+        "kid_tip": "Con hãy làm bộ mặt ngơ ngác bất ngờ như khi ai đó gọi tên mình, miệng hé mở tự nhiên và phát âm 'Á' thật ngắn và dứt khoát nhé!",
+        "steps": {
+          "lips": "Miệng hé mở tự nhiên, cơ môi hoàn toàn thả lỏng, không căng dẹt cũng không tròn môi.",
+          "teeth": "Hai hàm răng hơi tách nhẹ.",
+          "tongue": "Lưỡi thả lỏng tự nhiên ở giữa khoang miệng, không nâng cũng không hạ sâu."
+        },
+        "vietnamese_mistake": "Hay đọc thành âm 'ă' hoặc âm 'ơ' kéo dài -> Âm chuẩn phải là âm cực ngắn, bật hơi nhanh từ cổ họng.",
+        "animation_prompt": "A cute sleepy bear with a relaxed, slightly parted mouth, presenting a completely relaxed expression with no muscle tension."
+      },
+      {
+        "ipa": "/ɜː/",
+        "vietnamese_analogy": "Cong lưỡi nói chữ 'Ơ' kéo dài",
+        "kid_tip": "Con nói chữ 'Ơ' của tiếng Việt nhưng hãy cuộn cái lưỡi của mình cong ngược lên phía trên vòm họng một chút để tiếng nghe ấm áp hơn nhé! -> 'Ơ-ơ-ơ'!",
+        "steps": {
+          "lips": "Môi mở hờ, hơi tròn nhẹ và hoàn toàn thả lỏng.",
+          "teeth": "Hai hàm răng mở nhẹ khoảng cách vừa phải.",
+          "tongue": "Đầu lưỡi hơi cong ngược lên trên và lùi về phía sau khoang miệng (không chạm vào vòm họng)."
+        },
+        "vietnamese_mistake": "Người Việt thường đọc thành âm 'ơ' phẳng (như 'bird' đọc thành 'bớt', 'girl' đọc thành 'gơ') -> Mất đi âm cong lưỡi '/r/' đặc trưng của tiếng Mỹ.",
+        "animation_prompt": "A clever cartoon owl with its mouth softly open, demonstrating a curved arrow inside indicating the tongue curling upward towards the roof of the mouth."
+      }
+    ],
+    "consonants": [
+      {
+        "ipa": "/s/",
+        "vietnamese_analogy": "Tiếng rắn rít kẽ răng 'Sssss'",
+        "kid_tip": "Con hãy khép răng lại, mỉm cười và đẩy hơi qua kẽ răng thật mạnh giống như một chú rắn đang trườn bò lướt cỏ kêu 'Sssss' nhé!",
+        "steps": {
+          "lips": "Khóe miệng mở nhẹ sang hai bên.",
+          "teeth": "Hai hàm răng khép chặt lại với nhau.",
+          "tongue": "Đầu lưỡi đặt rất gần mặt sau răng cửa trên nhưng không chạm răng, để chừa một khe hẹp cho luồng hơi thoát ra."
+        },
+        "vietnamese_mistake": "Hay bị nuốt âm đuôi '/s/' cuối từ (như 'bus' đọc thành 'bớ') hoặc phát âm nhầm lẫn sang âm 'x' hoặc 'sh' uốn lưỡi.",
+        "animation_prompt": "A tiny green garden snake smiling and showing its front teeth aligned, blowing out cute small cartoon wind swirls."
+      },
+      {
+        "ipa": "/ʃ/",
+        "vietnamese_analogy": "Suỵt! Bé nói khẽ thôi 'Shhhh!'",
+        "kid_tip": "Mỗi khi muốn bảo ai đó giữ trật tự, con chu môi ra và làm tiếng 'Suỵt... khẽ thôi!' đúng không nào? Đó chính là âm này đấy! -> 'Shhhh'!",
+        "steps": {
+          "lips": "Môi chu tròn và nhô mạnh ra phía trước (như đang chuẩn bị hôn má mẹ).",
+          "teeth": "Hai hàm răng khép gần sát nhau.",
+          "tongue": "Mặt lưỡi nâng lên sát vòm họng trên, đẩy luồng hơi mạnh đi qua kẽ răng tạo ra tiếng xì xào lớn."
+        },
+        "vietnamese_mistake": "Hay đọc nhầm thành âm 's' nhẹ của tiếng Việt, làm môi dẹt phẳng thay vì chu tròn nhô ra ngoài -> Mất đi luồng hơi gió dày dặn.",
+        "animation_prompt": "A cute cartoon baby dinosaur holding its index finger up to its puckered, rounded lips in a classic 'shush' pose."
+      },
+      {
+        "ipa": "/tʃ/",
+        "vietnamese_analogy": "Tiếng xe lửa xình xịch 'Ch-ch-ch'",
+        "kid_tip": "Hãy làm hai tay xoay tròn giả vờ làm bánh xe lửa, miệng bật hơi thật mạnh 'Ch-ch-ch' để đoàn tàu chuyển bánh nào!",
+        "steps": {
+          "lips": "Môi chu tròn nhô ra phía trước giống âm /ʃ/.",
+          "teeth": "Hai hàm răng khép lại.",
+          "tongue": "Đầu lưỡi chạm chặt vào phần nướu phía sau răng cửa trên để chặn hơi hoàn toàn, sau đó bật mạnh lưỡi ra để hơi thoát ra đột ngột."
+        },
+        "vietnamese_mistake": "Người Việt hay đọc nhầm thành chữ 'ch' của tiếng Việt (phát âm bằng luồng hơi yếu, phẳng miệng, như 'church' đọc thành 'chớt') -> Không có tiếng bật hơi gió mạnh mẽ.",
+        "animation_prompt": "A happy toy steam train puffing out cartoon clouds, with the train engine mouth puckering and popping out air forcefully."
+      },
+      {
+        "ipa": "/dʒ/",
+        "vietnamese_analogy": "Bật hơi rung cổ họng 'Trờ rít'",
+        "kid_tip": "Giống hệt tiếng xe lửa 'Ch-ch-ch' nhưng lần này con hãy dùng bàn tay sờ lên cổ họng, vừa bật hơi vừa làm cho cổ họng mình rung bần bật như tiếng động cơ xe máy nhé!",
+        "steps": {
+          "lips": "Môi chu tròn nhô ra ngoài giống âm /tʃ/.",
+          "teeth": "Hai hàm răng khép gần sát.",
+          "tongue": "Vị trí lưỡi giống âm /tʃ/ nhưng khi bật hơi phải làm rung dây thanh quản (phát âm có tiếng vang rung cổ họng)."
+        },
+        "vietnamese_mistake": "Thường đọc nhầm thành chữ 'di' hoặc 'gi' tiếng Việt vốn rất nhẹ và phẳng môi (như 'orange' đọc thành 'o-ren-di') -> Thiếu độ bật hơi và chu môi tròn.",
+        "animation_prompt": "A cool lion cub wearing sunglasses, roar-whispering with puckered lips while its throat has glowing golden waves representing voice vibration."
+      },
+      {
+        "ipa": "/θ/",
+        "vietnamese_analogy": "Đặt lưỡi kẽ răng thổi hơi 'Thờ gió'",
+        "kid_tip": "Con hãy thè đầu lưỡi ra ngoài kẹp giữa hai răng cửa một tí xíu thôi nhé, rồi thổi hơi nhẹ qua đầu lưỡi để làm mát lòng bàn tay nào!",
+        "steps": {
+          "lips": "Mở rộng tự nhiên theo chiều ngang.",
+          "teeth": "Răng trên và răng dưới kẹp nhẹ phần đầu lưỡi ở giữa.",
+          "tongue": "Đầu lưỡi hơi thè ra ngoài giữa hai hàm răng, thổi luồng hơi nhẹ thoát ra qua khe hở giữa răng trên và đầu lưỡi (không rung cổ họng)."
+        },
+        "vietnamese_mistake": "Đây là lỗi kinh điển nhất của người Việt! Trẻ em luôn đọc thành âm 'th' tiếng Việt (như 'think' đọc thành 'thinh', 'thin' đọc thành 'thin') hoặc âm 't', 'ph' -> Thiếu hoàn toàn thao tác đặt lưỡi ra ngoài kẽ răng thổi hơi.",
+        "animation_prompt": "A silly cartoon frog with its flat pink tongue sticking out slightly between its upper and lower teeth, blowing soft white air bubbles."
+      },
+      {
+        "ipa": "/ð/",
+        "vietnamese_analogy": "Đặt lưỡi kẽ răng làm rung cổ họng",
+        "kid_tip": "Giống y hệt trò chơi đặt lưỡi kẽ răng thổi hơi ở trên, nhưng lần này con hãy thổi hơi và kêu thật to thành tiếng 'Dừ-dừ-dừ' để cổ họng rung bần bật lên nhé!",
+        "steps": {
+          "lips": "Mở rộng tự nhiên.",
+          "teeth": "Răng trên và răng dưới kẹp nhẹ đầu lưỡi ở giữa.",
+          "tongue": "Đầu lưỡi thè nhẹ giữa hai hàm răng cửa, rung dây thanh quản tạo tiếng dế kêu 'Dzzz' thoát ra kẽ răng."
+        },
+        "vietnamese_mistake": "Người Việt hay đọc nhầm thành âm 'd' hoặc 'đ' tiếng Việt (như 'this' đọc thành 'đít' hoặc 'dít', 'mother' đọc thành 'mơ-đờ') -> Làm mất đi nét đặc trưng của âm răng-lưỡi sát rung.",
+        "animation_prompt": "A cute cartoon honeybee sticking its tongue out slightly between its teeth while buzzing with yellow vibration waves surrounding its head."
+      }
+    ]
+  },
+  "dev_implementation_guide": {
+    "app_architecture": {
+      "title": "HƯỚNG DẪN TÍCH HỢP TÀI NGUYÊN NGỮ ÂM CHO LẬP TRÌNH AI (AI CODE)",
+      "target_audience": "Lập trình viên AI, Nhà thiết kế UI/UX, Chuyên gia biên soạn nội dung",
+      "interactive_modes": {
+        "mode_1_phonics_play": {
+          "name": "🔤 Phonics Cơ Bản (4-7 tuổi)",
+          "visual_style": "Rực rỡ, gam màu pastel năng động (vàng chanh, xanh mint, hồng đào). Sử dụng hình ảnh động hoạt họa quy mô lớn, nút chạm nổ bong bóng, ngôi sao lấp lánh.",
+          "pedagogical_focus": "Nhận diện mặt chữ (Letter Recognition) + Nghe âm vị (Ear Training) + Ghép vần ngắn (CVC Blending) thông qua hành động vật lý (Actions) và chuyện kể.",
+          "ui_components": [
+            "Bảng 42 ô bong bóng âm Jolly Phonics xếp theo 7 Set màu.",
+            "Trình phát âm thanh kèm nút 'Hành động của Bé' (Khi chạm vào sẽ hiện video hoạt họa em bé làm mẫu cử chỉ tay tương ứng của Jolly Phonics).",
+            "Khay kéo thả chữ cái để ghép vần CVC (ví dụ bé kéo chữ 's', 'a', 't' vào rổ để tạo thành chữ 'sat' -> Chú chim cánh cụt bay ra đọc to vần và ăn quả táo)."
+          ]
+        },
+        "mode_2_rules_master": {
+          "name": "📖 60 Quy Tắc Đánh Vần (8 tuổi+)",
+          "visual_style": "Khoa học, logic, giao diện 'Giải mã mật mã' hoặc 'Xoay Rubik'. Gam màu sâu hơn (xanh dương đậm, xám titan, cam vàng neon).",
+          "pedagogical_focus": "Tư duy logic phát hiện quy luật vần + Phân tách trọng âm (Stress) + Tự viết phiên âm chuẩn xác.",
+          "ui_components": [
+            "Vòng xoay Rubik quy tắc thông minh (xoay để ghép chữ và xem sự biến đổi âm vần).",
+            "Thanh hiển thị sóng âm tần số giọng đọc của trẻ so khớp với chuyên gia (Pitch-matching graph).",
+            "Nút nhấn 'Trọng âm ở đâu?' (Từ vựng hiện ra dạng khối hộp, bé phải gõ búa vào khối hộp chứa vần được nhấn giọng mạnh nhất để nhận điểm thưởng)."
+          ]
+        }
+      },
+      "camera_mouth_tracking_spec": {
+        "feature_name": "👄 AI Camera Gương Thần - So Khớp Khẩu Hình Miệng",
+        "framework_suggestions": [
+          "Google MediaPipe Face Mesh (Web/Mobile)",
+          "Apple ARKit (iOS)",
+          "ARCore Face Mesh (Android)"
+        ],
+        "ui_flow": [
+          "Bé bấm vào nút 'Xem miệng tớ này!'.",
+          "App mở một nửa màn hình dưới dạng camera selfie trực tiếp (Gương thần), nửa màn hình còn lại hiển thị hoạt họa 2D góc nghiêng và trực diện của nhân vật App (Khủng long/Ong vàng) phát âm.",
+          "Hệ thống MediaPipe định vị các điểm mốc trên môi bé (Lips Landmark 0-17) để vẽ vòng viền tròn/dẹt màu xanh lá nếu khẩu hình bé khớp với cấu trúc trong database của âm.",
+          "Hệ thống hiển thị thông điệp cổ vũ cực đáng yêu dựa trên cảm biến cử động cằm (ví dụ khi học âm /æ/, nếu cằm bé hạ xuống đủ sâu -> 'Oa! Bé ngoác miệng ăn táo giỏi thế! 5 sao nhé!')"
+        ]
+      }
+    }
+  }
+}
