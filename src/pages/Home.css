@@ -1,84 +1,82 @@
 /* src/pages/Home.css */
-.home-page {
-  padding: var(--space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+/* Duolingo-style Learning Path Map */
+
+/* ─── Page Container ───────────────────────────────────────── */
+.map-page {
+  background: #0F172A;
+  min-height: 100%;
+  min-height: 100dvh;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Daily Banner */
-.daily-banner {
-  background: linear-gradient(135deg, var(--green-500), var(--green-light));
-  border-radius: var(--radius-xl);
-  padding: var(--space-4) var(--space-5);
+/* ─── Scrollable column ─────────────────────────────────────── */
+.map-scroll {
+  padding: 16px 16px 80px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  box-shadow: var(--shadow-md);
-}
-
-.daily-info {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0;
 }
 
-.daily-label {
-  font-size: var(--text-sm);
-  font-weight: 700;
-  color: rgba(255,255,255,0.9);
-}
-
-.daily-xp {
-  font-weight: 800;
-}
-
-.daily-xp-val {
-  font-size: var(--text-xl);
-  color: white;
-}
-
-.daily-xp-total {
-  font-size: var(--text-sm);
-  color: rgba(255,255,255,0.8);
-}
-
-.daily-banner .progress-track {
-  background: rgba(255,255,255,0.3);
-}
-
-.daily-banner .progress-fill {
-  background: white;
-}
-
-.daily-banner .progress-fill::after {
-  background: rgba(255,255,255,0.3);
-}
-
-/* Duo Section */
-.home-duo-section {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-4) 0;
-}
-
-/* Course Path */
-.course-path {
+/* ─── Section: one Unit Banner + 4 nodes ────────────────────── */
+.map-section {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 0;
+  margin-bottom: 24px;
 }
 
-.path-title {
-  font-size: var(--text-xl);
-  font-weight: 900;
-  color: var(--gray-900);
-  text-align: center;
-}
-
-.path-nodes {
+/* ─── Nodes column ──────────────────────────────────────────── */
+.map-nodes {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-2) 0;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px 0 0;
+  position: relative;
+}
+
+/* ─── Individual node wrapper (zigzag positioning) ──────────── */
+.map-node-position {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 4px 0;
+}
+
+/* ─── Connector line between nodes ─────────────────────────── */
+.map-connector {
+  width: 3px;
+  height: 20px;
+  border-radius: 2px;
+  margin: 0 auto;
+  margin-bottom: 4px;
+}
+
+.map-connector.done {
+  background: linear-gradient(180deg, #1CB0F6, #0082BB);
+}
+
+.map-connector.locked {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Responsive tweaks ─────────────────────────────────────── */
+@media (max-width: 360px) {
+  .map-scroll {
+    padding: 12px 8px 80px;
+  }
+}
+
+@media (min-width: 480px) {
+  .map-section {
+    max-width: 440px;
+  }
 }

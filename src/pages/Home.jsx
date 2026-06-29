@@ -1,79 +1,138 @@
 // src/pages/Home.jsx
-import { useEffect, useState } from 'react';
-import { loadProfile } from '../utils/storage';
+// Learning Path Map — Duolingo-style journey map
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useGame } from '../context/GameContext';
 import { COURSES } from '../data/courses';
-import SkillNode from '../components/home/SkillNode';
-import DuoMascot from '../components/ui/DuoMascot';
+import PathNode from '../components/map/PathNode';
+import UnitBanner from '../components/map/UnitBanner';
+import Guidebook from '../components/map/Guidebook';
 import './Home.css';
 
-const DUO_MESSAGES = [
-  'Học thêm một bài nào! 🎯',
-  'Bạn đang làm rất tốt! ⭐',
-  'Tiếp tục cố gắng nhé! 💪',
-  'Hôm nay học chủ đề gì? 🤔',
-  'Duo đang chờ bạn! 🦉',
-];
+const NODE_TYPES = ['listen', 'vocab', 'practice', 'challenge'];
+
+// Zigzag horizontal positions for 4 nodes inside a section
+// Using percentage margin-left to create Duolingo-style zig-zag
+const ZIGZAG_POSITIONS = ['58%', '38%', '18%', '38%'];
+
+/**
+ * Determine node status based on course progress.
+ * Rules:
+ *  - Each node represents 25% of course completion.
+ *  - Node is 'completed' if progress >= (nodeIdx+1)*25
+ *  - Node is 'active' if it's the next node to unlock, AND the course is unlocked
+ *  - Node is 'locked' otherwise
+ */
+function getNodeStatus(progress, nodeIdx, courseIdx, prevProgress) {
+  const threshold = (nodeIdx + 1) * 25;
+  const prevThreshold = nodeIdx * 25;
+
+  if (progress >= threshold) return 'completed';
+
+  // A course is accessible if it's the first OR prev course has at least some progress
+  const courseUnlocked = courseIdx === 0 || prevProgress >= 25;
+  if (!courseUnlocked) return 'locked';
+
+  // Active = next node to tackle (progress reached the gate of this node)
+  if (progress >= prevThreshold) return 'active';
+
+  return 'locked';
+}
+
+/**
+ * Calculate stars for a completed node.
+ * Each node covers 25% progress. Stars = how well that segment was done.
+ */
+function getNodeStars(progress, nodeIdx) {
+  const segment = progress - nodeIdx * 25;
+  return Math.min(3, Math.max(0, Math.floor(segment / 8)));
+}
 
 export default function Home() {
-  const { state, getCourseProgress } = useGame();
-  const [profile, setProfile] = useState(null);
-  const [message] = useState(() => DUO_MESSAGES[Math.floor(Math.random() * DUO_MESSAGES.length)]);
+  const navigate = useNavigate();
+  const { getCourseProgress } = useGame();
+  const [guidebookUnit, setGuidebookUnit] = useState(null);
+  const activeNodeRef = useRef(null);
 
+  // Scroll to first active/unlocked node on mount
   useEffect(() => {
-    const p = loadProfile();
-    setProfile(p);
+    if (activeNodeRef.current) {
+      setTimeout(() => {
+        activeNodeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
   }, []);
 
-  const dailyProgress = Math.min(100, Math.round((state.dailyXp / (state.dailyGoal || 50)) * 100));
+  const handleNodeClick = (course) => {
+    navigate('/lesson', { state: { courseId: course.id } });
+  };
 
   return (
-    <div className="home-page">
-      {/* Daily Goal Banner */}
-      <div className="daily-banner">
-        <div className="daily-info">
-          <span className="daily-label">Mục tiêu hôm nay</span>
-          <span className="daily-xp">
-            <span className="daily-xp-val">{state.dailyXp}</span>
-            <span className="daily-xp-total">/{state.dailyGoal || 50} XP ⚡</span>
-          </span>
-        </div>
-        <div className="progress-track">
-          <div className="progress-fill" style={{ width: `${dailyProgress}%` }} />
-        </div>
-      </div>
+    <div className="map-page">
+      <div className="map-scroll">
+        {COURSES.map((course, courseIdx) => {
+          const progress = getCourseProgress(course.id);
+          const prevProgress = courseIdx > 0 ? getCourseProgress(COURSES[courseIdx - 1].id) : 100;
 
-      {/* Duo greeting */}
-      <div className="home-duo-section">
-        <DuoMascot size="md" message={message} mood="happy" />
-      </div>
+          // Find first active node in this course (for scroll ref)
+          const firstActiveNodeIdx = [0, 1, 2, 3].findIndex(
+            (nodeIdx) => getNodeStatus(progress, nodeIdx, courseIdx, prevProgress) === 'active'
+          );
 
-      {/* Course Path */}
-      <div className="course-path">
-        <h2 className="path-title">🗺️ Hành trình học tập</h2>
-        <div className="path-nodes">
-          {COURSES.map((course, index) => {
-            const progress = getCourseProgress(course.id);
-            const isCompleted = progress >= 100;
-            const isActive = !isCompleted && (index === 0 || getCourseProgress(COURSES[index - 1]?.id) > 0);
-            const isLocked = false; // All unlocked for kids!
-
-            return (
-              <SkillNode
-                key={course.id}
-                course={course}
-                index={index}
-                progress={progress}
-                isActive={isActive && !isCompleted}
-                isLocked={isLocked}
+          return (
+            <div key={course.id} className="map-section">
+              {/* Unit banner with guidebook button */}
+              <UnitBanner
+                unit={course}
+                unitNumber={courseIdx + 1}
+                onGuidebook={() => setGuidebookUnit(course)}
               />
-            );
-          })}
-        </div>
+
+              {/* Node zigzag column */}
+              <div className="map-nodes">
+                {[0, 1, 2, 3].map((nodeIdx) => {
+                  const status = getNodeStatus(progress, nodeIdx, courseIdx, prevProgress);
+                  const stars = getNodeStars(progress, nodeIdx);
+                  const isFirstActive = nodeIdx === firstActiveNodeIdx;
+
+                  return (
+                    <div
+                      key={nodeIdx}
+                      className="map-node-position"
+                      style={{ marginLeft: ZIGZAG_POSITIONS[nodeIdx] }}
+                      ref={isFirstActive ? activeNodeRef : null}
+                    >
+                      {/* Connector line above (except first node) */}
+                      {nodeIdx > 0 && (
+                        <div
+                          className={`map-connector ${status === 'locked' ? 'locked' : 'done'}`}
+                        />
+                      )}
+                      <PathNode
+                        nodeType={NODE_TYPES[nodeIdx]}
+                        status={status}
+                        stars={stars}
+                        onClick={() => handleNodeClick(course)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Bottom spacer */}
+        <div style={{ height: 40 }} />
       </div>
 
-      {/* Bottom padding */}
-      <div style={{ height: 32 }} />
+      {/* Guidebook modal */}
+      {guidebookUnit && (
+        <Guidebook
+          unit={guidebookUnit}
+          onClose={() => setGuidebookUnit(null)}
+        />
+      )}
     </div>
   );
 }
