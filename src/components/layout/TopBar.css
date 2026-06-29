@@ -7,14 +7,15 @@
   width: 100%;
   max-width: var(--max-width);
   height: var(--topbar-height);
-  background: var(--white);
-  border-bottom: 2px solid var(--gray-200);
+  background: var(--topbar-bg);
+  border-bottom: 2px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--space-4);
   z-index: 50;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .topbar-logo {
@@ -43,4 +44,24 @@
 
 .hearts-row .heart-icon {
   font-size: 18px;
+}
+
+/* ── Dark mode toggle button ── */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: var(--surface-input);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.theme-toggle:active {
+  transform: scale(0.88);
 }
