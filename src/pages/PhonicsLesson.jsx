@@ -63,8 +63,17 @@ export default function PhonicsLesson() {
             <div className="rule-text">
               Từ có chứa <span className="phonics-highlight lg">{rule.pattern}</span>
             </div>
-            <div className="rule-text">
-              thì đọc là <span className="phonics-sound-highlight">{rule.sound}</span>
+            <div className="rule-text" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px'}}>
+              <span>thì đọc là</span> 
+              <span className="phonics-sound-highlight">{rule.sound}</span>
+              <button 
+                className="btn-speaker-card" 
+                style={{position: 'relative', top: '0', right: '0'}} 
+                onClick={() => speakText(rule.pattern)}
+                title="Nghe âm này"
+              >
+                🔊
+              </button>
             </div>
           </div>
         </div>
