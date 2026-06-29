@@ -1,0 +1,116 @@
+/* src/components/home/SkillNode.css */
+.skill-node-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.skill-node-wrapper.center { align-self: center; }
+.skill-node-wrapper.right { align-self: flex-end; margin-right: var(--space-10); }
+.skill-node-wrapper.left { align-self: flex-start; margin-left: var(--space-10); }
+
+.skill-node {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.skill-node.unlocked,
+.skill-node.active {
+  background: var(--node-color, var(--green-500));
+  box-shadow: 0 6px 0 var(--node-dark, var(--green-600)), var(--shadow-md);
+}
+
+.skill-node.completed {
+  background: var(--node-color, var(--green-500));
+  box-shadow: 0 6px 0 var(--node-dark, var(--green-600));
+}
+
+.skill-node.locked {
+  background: var(--gray-200);
+  box-shadow: 0 6px 0 var(--gray-400);
+  cursor: not-allowed;
+}
+
+.skill-node:not(.locked):active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--node-dark, var(--green-600));
+}
+
+.skill-node:not(.locked):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--node-dark, var(--green-600)), var(--shadow-lg);
+}
+
+.skill-emoji {
+  font-size: 36px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.skill-lock {
+  font-size: 28px;
+}
+
+.skill-crown {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  animation: starBurst 0.5s ease both;
+}
+
+.skill-ring {
+  position: absolute;
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+}
+
+.skill-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 3px solid var(--node-color, var(--green-500));
+  animation: ripple 1.8s ease-out infinite;
+}
+
+.skill-title {
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--gray-900);
+  text-align: center;
+}
+
+.skill-title.locked-text {
+  color: var(--gray-400);
+}
+
+.skill-progress-track {
+  width: 80px;
+  height: 8px;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.skill-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skill-node.active {
+  animation: pulseGlow 2s ease-in-out infinite;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Dulygo",
+  "short_name": "Dulygo",
+  "description": "Học tiếng Anh vui vẻ mỗi ngày!",
+  "start_url": "/dulygo/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#58CC02",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/dulygo/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

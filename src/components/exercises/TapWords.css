@@ -1,0 +1,44 @@
+/* src/components/exercises/TapWords.css */
+.tapwords-container {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.tapwords-question {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  text-align: center;
+  color: var(--gray-900);
+  padding: var(--space-4) 0;
+}
+
+.tapwords-answer {
+  min-height: 64px;
+  border: 2px dashed var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.tapwords-placeholder {
+  font-size: var(--text-sm);
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+.tapwords-divider {
+  height: 2px;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+}
+
+.tapwords-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  padding: var(--space-2) 0;
+}

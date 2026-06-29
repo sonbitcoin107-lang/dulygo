@@ -1,0 +1,49 @@
+/* src/components/exercises/MultipleChoice.css */
+.mc-container {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.mc-question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+}
+
+.speak-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--blue-500);
+  background: var(--blue-100);
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 0 var(--blue-600);
+}
+
+.speak-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--blue-600);
+}
+
+.mc-question-text {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  text-align: center;
+  color: var(--gray-900);
+  line-height: 1.4;
+}
+
+.mc-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

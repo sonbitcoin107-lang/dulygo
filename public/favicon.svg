@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Body -->
+  <ellipse cx="50" cy="62" rx="30" ry="28" fill="#58CC02"/>
+  <!-- Head -->
+  <circle cx="50" cy="35" r="26" fill="#58CC02"/>
+  <!-- Eyes white -->
+  <circle cx="40" cy="30" r="10" fill="white"/>
+  <circle cx="60" cy="30" r="10" fill="white"/>
+  <!-- Eyes pupils -->
+  <circle cx="41" cy="31" r="6" fill="#1A1A1A"/>
+  <circle cx="61" cy="31" r="6" fill="#1A1A1A"/>
+  <!-- Eye shine -->
+  <circle cx="43" cy="28" r="2" fill="white"/>
+  <circle cx="63" cy="28" r="2" fill="white"/>
+  <!-- Beak -->
+  <ellipse cx="50" cy="42" rx="8" ry="5" fill="#FF9600"/>
+  <!-- Eyebrows -->
+  <rect x="33" y="19" width="14" height="4" rx="2" fill="#3D9900" transform="rotate(-10 33 19)"/>
+  <rect x="53" y="19" width="14" height="4" rx="2" fill="#3D9900" transform="rotate(10 53 19)"/>
+  <!-- Belly -->
+  <ellipse cx="50" cy="68" rx="18" ry="16" fill="#89E219"/>
+  <!-- Wings -->
+  <ellipse cx="22" cy="58" rx="10" ry="16" fill="#3D9900" transform="rotate(-15 22 58)"/>
+  <ellipse cx="78" cy="58" rx="10" ry="16" fill="#3D9900" transform="rotate(15 78 58)"/>
+  <!-- Feet -->
+  <ellipse cx="38" cy="90" rx="10" ry="5" fill="#FF9600"/>
+  <ellipse cx="62" cy="90" rx="10" ry="5" fill="#FF9600"/>
+</svg>

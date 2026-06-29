@@ -1,0 +1,67 @@
+/* src/components/ui/DuoMascot.css */
+.duo-mascot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.duo-img {
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(88, 204, 2, 0.3));
+}
+
+.duo-sm .duo-img { width: 60px; height: 60px; }
+.duo-md .duo-img { width: 100px; height: 100px; }
+.duo-lg .duo-img { width: 140px; height: 140px; }
+.duo-xl .duo-img { width: 180px; height: 180px; }
+
+.duo-bubble {
+  position: relative;
+  background: var(--white);
+  border: 2.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-3);
+  max-width: 240px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.duo-bubble p {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.duo-bubble-tail {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid var(--white);
+}
+
+.duo-bubble-tail::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: -11px;
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-bottom: 13px solid var(--gray-200);
+}
+
+.mood-happy .duo-img { filter: drop-shadow(0 8px 16px rgba(88, 204, 2, 0.4)); }
+.mood-sad .duo-img { filter: grayscale(0.3) drop-shadow(0 8px 16px rgba(255, 75, 75, 0.3)); }
+.mood-excited .duo-img {
+  filter: drop-shadow(0 8px 20px rgba(255, 217, 0, 0.5));
+  animation: duoWiggle 0.6s ease infinite, float 3s ease-in-out infinite;
+}

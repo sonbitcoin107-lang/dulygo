@@ -1,0 +1,84 @@
+/* src/pages/Home.css */
+.home-page {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Daily Banner */
+.daily-banner {
+  background: linear-gradient(135deg, var(--green-500), var(--green-light));
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-md);
+}
+
+.daily-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.daily-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+}
+
+.daily-xp {
+  font-weight: 800;
+}
+
+.daily-xp-val {
+  font-size: var(--text-xl);
+  color: white;
+}
+
+.daily-xp-total {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.8);
+}
+
+.daily-banner .progress-track {
+  background: rgba(255,255,255,0.3);
+}
+
+.daily-banner .progress-fill {
+  background: white;
+}
+
+.daily-banner .progress-fill::after {
+  background: rgba(255,255,255,0.3);
+}
+
+/* Duo Section */
+.home-duo-section {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+/* Course Path */
+.course-path {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.path-title {
+  font-size: var(--text-xl);
+  font-weight: 900;
+  color: var(--gray-900);
+  text-align: center;
+}
+
+.path-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+}

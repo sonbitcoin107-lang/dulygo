@@ -1,0 +1,39 @@
+/* src/components/exercises/FillBlank.css */
+.fillblank-container {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.fillblank-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+}
+
+.fillblank-question {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  text-align: center;
+  color: var(--gray-900);
+  line-height: 1.5;
+}
+
+.fillblank-hint {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  font-weight: 600;
+  background: var(--yellow-100);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--yellow-500);
+}
+
+.fillblank-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
