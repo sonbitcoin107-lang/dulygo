@@ -9,8 +9,9 @@ import Onboarding from './pages/Onboarding';
 import Lesson from './pages/Lesson';
 import Result from './pages/Result';
 import Profile from './pages/Profile';
-import Shop from './pages/Shop';
 import Speaking from './pages/Speaking';
+import PhonicsMap from './pages/PhonicsMap';
+import PhonicsLesson from './pages/PhonicsLesson';
 
 function AppLayout({ children, showNav = true }) {
   return (
@@ -96,11 +97,22 @@ export default function App() {
           />
 
           <Route
-            path="/shop"
+            path="/phonics"
             element={
               <ProtectedRoute>
                 <AppLayout>
-                  <Shop />
+                  <PhonicsMap />
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/phonics/:id"
+            element={
+              <ProtectedRoute>
+                <AppLayout showNav={false}>
+                  <PhonicsLesson />
                 </AppLayout>
               </ProtectedRoute>
             }

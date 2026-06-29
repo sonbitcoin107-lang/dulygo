@@ -1,0 +1,85 @@
+/* src/pages/PhonicsMap.css */
+
+.phonics-map-page {
+  padding: 16px;
+  padding-bottom: 80px; /* Space for bottom nav */
+  background: #0F172A;
+  min-height: 100%;
+}
+
+.phonics-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.phonics-header h1 {
+  font-size: 24px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.phonics-header p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.phonics-rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phonics-rule-item {
+  background: #1E293B;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.phonics-rule-item:hover {
+  background: #334155;
+}
+
+.phonics-rule-item:active {
+  transform: scale(0.98);
+}
+
+.rule-item-badge {
+  background: #3B82F6;
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.rule-item-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rule-item-pattern {
+  font-size: 20px;
+  font-weight: 900;
+  color: #EF4444; /* Red color for pattern */
+}
+
+.rule-item-sound {
+  font-size: 16px;
+  font-weight: 600;
+  color: #10B981; /* Green color for sound */
+}
+
+.rule-item-arrow {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 24px;
+  font-weight: 300;
+}
