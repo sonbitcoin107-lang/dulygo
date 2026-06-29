@@ -3,36 +3,40 @@ import { useState, useMemo, useEffect } from 'react';
 import { speakText } from '../../utils/speech';
 import './PhonicsBlendingGame.css';
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-export default function PhonicsBlendingGame({ availableLetters = [], blendingWords = [] }) {
-  // Add index to letters so duplicates can exist or just handle by index
+export default function PhonicsBlendingGame({ 
+  targetWord, 
+  targetWordIpa, 
+  targetWordVi, 
+  targetWordEmoji, 
+  correctSequence = [], 
+  availableLetters = [],
+  onSuccess 
+}) {
   const bankItems = useMemo(() => {
-    // If letters are less than 6, maybe duplicate some vowels? 
-    // Usually availableLetters is precisely the group's letters
-    let letters = shuffle(availableLetters);
-    // Ensure we have some vowels if not enough, but curriculum has them.
-    return letters.map((letter, idx) => ({ id: `bank-${idx}`, letter, idx }));
+    return availableLetters.map((letter, idx) => ({ id: `bank-${idx}`, letter, idx }));
   }, [availableLetters]);
 
-  const [selected, setSelected] = useState([]); // Max 3 items
+  const [selected, setSelected] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeSlotIndex, setActiveSlotIndex] = useState(-1);
   const [result, setResult] = useState(null);
 
+  // Reset state when target word changes
+  useEffect(() => {
+    setSelected([]);
+    setResult(null);
+    setIsPlaying(false);
+    setActiveSlotIndex(-1);
+  }, [targetWord]);
+
+  const maxSlots = correctSequence.length;
+  const slots = Array.from({ length: maxSlots }, (_, i) => i);
+
   const handleBankClick = (item) => {
     if (isPlaying) return;
-    if (selected.length >= 3) return;
+    if (selected.length >= maxSlots) return;
     if (selected.find(s => s.id === item.id)) return;
     
-    // Auto speak letter when tapped
     speakText(item.letter);
     setSelected(prev => [...prev, item]);
     setResult(null);
@@ -45,41 +49,46 @@ export default function PhonicsBlendingGame({ availableLetters = [], blendingWor
   };
 
   const handlePlayTrain = () => {
-    if (selected.length !== 3) return;
+    if (selected.length !== maxSlots) return;
     if (isPlaying) return;
     
     setIsPlaying(true);
     setResult(null);
     
-    const wordFormed = selected.map(s => s.letter).join('');
-    const matchedWord = blendingWords.find(w => w.word.toLowerCase() === wordFormed.toLowerCase());
+    const wordFormed = selected.map(s => s.letter).join('').toLowerCase();
+    const isCorrect = wordFormed === targetWord.toLowerCase() || wordFormed === correctSequence.join('').toLowerCase();
     
-    // Sequence
-    setTimeout(() => { setActiveSlotIndex(0); speakText(selected[0].letter); }, 0);
-    setTimeout(() => { setActiveSlotIndex(1); speakText(selected[1].letter); }, 600);
-    setTimeout(() => { setActiveSlotIndex(2); speakText(selected[2].letter); }, 1200);
+    // Sequence playback
+    selected.forEach((s, idx) => {
+      setTimeout(() => { 
+        setActiveSlotIndex(idx); 
+        speakText(s.letter); 
+      }, idx * 600);
+    });
     
     setTimeout(() => {
       setActiveSlotIndex(-1);
-      if (matchedWord) {
-        speakText(matchedWord.word);
-        setResult({ type: 'success', word: matchedWord });
+      if (isCorrect) {
+        speakText(targetWord);
+        setResult({ type: 'success' });
+        if (onSuccess) {
+          setTimeout(onSuccess, 2000); // Trigger next word after a delay
+        }
       } else {
         setResult({ type: 'error' });
       }
       setIsPlaying(false);
-    }, 1800);
+    }, maxSlots * 600);
   };
 
   const isUsed = (id) => selected.some(s => s.id === id);
-  const slots = [0, 1, 2]; // Fixed 3 slots
 
   return (
     <div className="blending-game-container">
       <h2 className="blending-title">Thực hành Ghép Vần</h2>
       <p className="blending-subtitle">Chạm chữ cái để xếp thành từ nhé!</p>
       
-      {/* 3 Active Slots */}
+      {/* Active Slots */}
       <div className="blending-board">
         {slots.map(i => (
           <div 
@@ -94,9 +103,9 @@ export default function PhonicsBlendingGame({ availableLetters = [], blendingWor
 
       {/* Train Button */}
       <button 
-        className={`btn-train ${selected.length === 3 ? 'ready' : ''} ${isPlaying ? 'playing' : ''}`}
+        className={`btn-train ${selected.length === maxSlots ? 'ready' : ''} ${isPlaying ? 'playing' : ''}`}
         onClick={handlePlayTrain}
-        disabled={selected.length !== 3 || isPlaying}
+        disabled={selected.length !== maxSlots || isPlaying}
       >
         {isPlaying ? '🚂...' : '🚂 Ghép vần!'}
       </button>
@@ -104,10 +113,10 @@ export default function PhonicsBlendingGame({ availableLetters = [], blendingWor
       {/* Result Card */}
       {result && result.type === 'success' && (
         <div className="blending-result success fade-in">
-          <div className="blending-emoji">{result.word.emoji}</div>
+          <div className="blending-emoji">{targetWordEmoji}</div>
           <div className="blending-info">
-            <div className="blending-word">{result.word.word}</div>
-            <div className="blending-vi">{result.word.vi}</div>
+            <div className="blending-word">{targetWord}</div>
+            <div className="blending-vi">{targetWordVi}</div>
           </div>
         </div>
       )}
@@ -136,3 +145,4 @@ export default function PhonicsBlendingGame({ availableLetters = [], blendingWor
     </div>
   );
 }
+

@@ -1,9 +1,10 @@
 // src/pages/PhonicsBasicLesson.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import curriculum from '../data/phonics/basic_phonics_curriculum.json';
 import { speakText } from '../utils/speech';
 import PhonicsBlendingGame from '../components/exercises/PhonicsBlendingGame';
+import { decomposeToPhonemes, shuffleArray } from '../utils/phonicsUtils';
 import './PhonicsBasicLesson.css';
 
 export default function PhonicsBasicLesson() {
@@ -12,6 +13,15 @@ export default function PhonicsBasicLesson() {
   
   const group = curriculum.find(g => g.group_id === parseInt(groupId));
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // New state for Game
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [letterBank, setLetterBank] = useState([]);
+
+  useEffect(() => {
+    // Reset word index when group changes or we re-enter lesson
+    setCurrentWordIndex(0);
+  }, [groupId]);
 
   if (!group) {
     return (
@@ -23,14 +33,27 @@ export default function PhonicsBasicLesson() {
   }
 
   const sounds = group.sounds;
-  const isGameSlide = currentIndex === sounds.length;
-  const currentSound = isGameSlide ? null : sounds[currentIndex];
+  const blendingWords = group.blending_words || group.words || [];
+  
+  // Game is reached after finishing all sound slides, AND only if we have words
+  const isGameSlide = currentIndex === sounds.length && blendingWords.length > 0;
+  const isDoneSlide = currentIndex === sounds.length && blendingWords.length === 0; // fallback
+  const currentSound = (isGameSlide || isDoneSlide) ? null : sounds[currentIndex];
+
+  const activeWordObj = isGameSlide ? blendingWords[currentWordIndex] : null;
+
+  useEffect(() => {
+    if (isGameSlide && activeWordObj?.word) {
+      const correctPhonemes = decomposeToPhonemes(activeWordObj.word);
+      const shuffledPhonemes = shuffleArray(correctPhonemes);
+      setLetterBank(shuffledPhonemes);
+    }
+  }, [isGameSlide, activeWordObj]);
 
   const handleNext = () => {
     if (currentIndex < sounds.length) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      // Finished the group!
       navigate('/phonics-basic');
     }
   };
@@ -41,13 +64,22 @@ export default function PhonicsBasicLesson() {
     }
   };
 
+  const handleWordCompleted = () => {
+    if (currentWordIndex < blendingWords.length - 1) {
+      setCurrentWordIndex(prev => prev + 1);
+    } else {
+      // Completed all words, go back to menu
+      navigate('/phonics-basic');
+    }
+  };
+
   const speakSound = () => {
-    if (isGameSlide) return;
+    if (!currentSound) return;
     const exampleWord = currentSound.example_word ? currentSound.example_word.word : '';
     speakText(`${currentSound.letter.split('').join(' ')}, as in, ${exampleWord}`);
   };
   const speakWord = () => {
-    if (isGameSlide) return;
+    if (!currentSound) return;
     if (currentSound?.example_word?.word) {
       speakText(currentSound.example_word.word);
     }
@@ -59,23 +91,33 @@ export default function PhonicsBasicLesson() {
         {currentIndex > 0 ? (
           <button className="btn-nav btn-prev" onClick={handlePrev}>◀</button>
         ) : (
-          <div style={{width: '44px'}}></div> /* spacer */
+          <div style={{width: '44px'}}></div>
         )}
-        <div className="lesson-progress">{isGameSlide ? 'Thực hành' : `Âm ${currentIndex + 1} / ${sounds.length}`}</div>
+        <div className="lesson-progress">{isGameSlide ? `Thực hành ${currentWordIndex + 1}/${blendingWords.length}` : `Âm ${currentIndex + 1} / ${sounds.length}`}</div>
         <button className="btn-nav btn-close" onClick={() => navigate('/phonics-basic')}>✕</button>
       </div>
 
-      {isGameSlide ? (
-        <div className="slide-container fade-in" key="game">
+      {isGameSlide && activeWordObj ? (
+        <div className="slide-container fade-in" key={`game-${activeWordObj.word}`}>
           <PhonicsBlendingGame 
-            availableLetters={sounds.map(s => s.letter)} 
-            blendingWords={group.blending_words || group.words || []} 
+            targetWord={activeWordObj.word}
+            targetWordIpa={activeWordObj.ipa}
+            targetWordVi={activeWordObj.vi}
+            targetWordEmoji={activeWordObj.emoji}
+            correctSequence={decomposeToPhonemes(activeWordObj.word)}
+            availableLetters={letterBank}
+            onSuccess={handleWordCompleted}
           />
+        </div>
+      ) : isDoneSlide ? (
+        <div className="slide-container fade-in" key="done">
+          <div style={{textAlign: 'center', color: 'white', marginTop: '100px'}}>
+            <h2>Hoàn thành Nhóm âm! 🎉</h2>
+          </div>
         </div>
       ) : (
         <div className="slide-container fade-in" key={currentSound.letter}>
           
-          {/* Letter & Sound */}
           <div className="letter-header">
             <h1 className="huge-letter">{currentSound.letter}</h1>
             <div className="sound-ipa-box" onClick={speakSound}>
@@ -84,7 +126,6 @@ export default function PhonicsBasicLesson() {
             </div>
           </div>
 
-          {/* Story Card */}
           {currentSound.mnemonic_story && (
             <div className="info-card story-card">
               <div className="info-card-header">📖 Câu chuyện</div>
@@ -92,7 +133,6 @@ export default function PhonicsBasicLesson() {
             </div>
           )}
 
-          {/* Action Card */}
           {currentSound.action && (
             <div className="info-card action-card">
               <div className="info-card-header">🙌 Hành động</div>
@@ -100,7 +140,6 @@ export default function PhonicsBasicLesson() {
             </div>
           )}
 
-          {/* Example Word */}
           {currentSound.example_word && (
             <div className="example-word-card" onClick={speakWord}>
               <div className="ex-emoji">{currentSound.example_word.emoji}</div>
@@ -117,10 +156,13 @@ export default function PhonicsBasicLesson() {
       )}
 
       <div className="basic-lesson-bottom">
-        <button className="btn-primary-huge" onClick={handleNext}>
-          {currentIndex === sounds.length ? 'Hoàn thành 🎉' : 'Tiếp theo ▶'}
-        </button>
+        {!isGameSlide && (
+          <button className="btn-primary-huge" onClick={handleNext}>
+            {currentIndex === sounds.length ? 'Hoàn thành 🎉' : 'Tiếp theo ▶'}
+          </button>
+        )}
       </div>
     </div>
   );
 }
+
