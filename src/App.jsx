@@ -38,7 +38,7 @@ function ProtectedRoute({ children }) {
 export default function App() {
   return (
     <GameProvider>
-      <BrowserRouter basename="/dulygo">
+      <BrowserRouter>
         <Routes>
           {/* Onboarding — no nav bars */}
           <Route
