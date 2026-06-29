@@ -1,4 +1,4 @@
-name: Deploy Dulygo to GitHub Pages
+name: Deploy MinhEnglish to GitHub Pages
 
 on:
   push:
