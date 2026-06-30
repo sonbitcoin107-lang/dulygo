@@ -175,7 +175,7 @@ export default [
     audio: 'I ride my bicycle to school',
     answer: 'bicycle',
     hint: 'bi..cle',
-    options: ['bicycle', 'biscuit', 'binocle', 'circle'],
+    options: ['bicycle', 'biscuit', 'binocle', 'bicycle'],
   },
 
   // --- Câu 17-20: tap_words mới ---

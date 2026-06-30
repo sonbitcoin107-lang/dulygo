@@ -210,7 +210,7 @@ export default [
       { text: '"You\'re welcome!" (Không có chi!)', emoji: '✅', correct: true },
       { text: '"Excuse me!" (Xin lỗi!)', emoji: '❌', correct: false },
       { text: '"I\'m sorry!" (Tôi xin lỗi!)', emoji: '❌', correct: false },
-      { text: '"No problem!"', emoji: '😊', correct: false },
+      { text: '"No problem!" cũng sai ý', emoji: '❌', correct: false },
     ],
   },
 

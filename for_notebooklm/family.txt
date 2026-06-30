@@ -121,7 +121,7 @@ export default [
     question: '"Parents" có nghĩa là gì?',
     audio: 'Parents',
     options: [
-      { text: 'Bố mẹ', emoji: '👨‍👩‍👦', correct: true },
+      { text: 'Bố mẹ', emoji: '👨‍👩‍👧', correct: true },
       { text: 'Ông bà', emoji: '👴👵', correct: false },
       { text: 'Anh chị em', emoji: '👫', correct: false },
       { text: 'Họ hàng', emoji: '👥', correct: false },

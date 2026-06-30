@@ -33,7 +33,7 @@ export default [
     question: 'Nối đồ dùng học tập',
     pairs: [
       { en: 'Ruler 📏', vi: 'Thước kẻ' },
-      { en: 'Eraser 📝', vi: 'Cục tẩy' },
+      { en: 'Eraser 🧹', vi: 'Cục tẩy' },
       { en: 'Bag 🎒', vi: 'Cặp sách' },
       { en: 'Desk 🪑', vi: 'Bàn học' },
     ],
