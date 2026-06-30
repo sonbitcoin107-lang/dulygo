@@ -64,6 +64,18 @@ export default function App() {
             }
           />
 
+          {/* Lesson with node index — Duolingo-style 4-node per unit */}
+          <Route
+            path="/lesson/:courseId/:nodeIdx"
+            element={
+              <ProtectedRoute>
+                <AppLayout showNav={false}>
+                  <Lesson />
+                </AppLayout>
+              </ProtectedRoute>
+            }
+          />
+
           {/* Result — no nav bars */}
           <Route
             path="/result"

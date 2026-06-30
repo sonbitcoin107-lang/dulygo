@@ -18,7 +18,8 @@ const defaultState = {
   streak: 0,
   lastStudyDate: null,
   lastHeartLostTime: null,
-  completedLessons: {}, // { courseId: Set<lessonIndex> }
+  completedLessons: {}, // legacy — kept for backward compat
+  completedNodes: {},   // { courseId: number[] } — node indices completed
   courseProgress: {},   // { courseId: number (0-100) }
   totalLessonsCompleted: 0,
   badges: [],
@@ -88,19 +89,20 @@ function reducer(state, action) {
     }
 
     case 'COMPLETE_LESSON': {
-      const { courseId, xpEarned, perfect } = action;
-      
-      const currentProgress = state.courseProgress[courseId] || 0;
-      const progress = Math.min(100, currentProgress + 25);
+      const { courseId, nodeIdx, xpEarned, perfect } = action;
 
-      const prevCompleted = state.completedLessons[courseId] || [];
-      // Keep track of how many times they completed (can be just an array of numbers)
-      const completed = [...prevCompleted, Date.now()];
+      // Track completed nodes per course
+      const prevNodes = state.completedNodes?.[courseId] || [];
+      const newNodes = prevNodes.includes(nodeIdx)
+        ? prevNodes
+        : [...prevNodes, nodeIdx];
+      // Progress = (distinct nodes completed / 4) * 100, capped at 100
+      const progress = Math.min(100, Math.round((newNodes.length / 4) * 100));
 
-      const today = new Date().toDateString();
       const isNewDay = checkNewDay(state.lastStudyDate);
       const lastDateStr = state.lastStudyDate ? new Date(state.lastStudyDate).toDateString() : null;
       const yesterday = new Date(Date.now() - 86400000).toDateString();
+      const today = new Date().toDateString();
 
       let newStreak = state.streak;
       let newDailyXp = isNewDay ? xpEarned : state.dailyXp + xpEarned;
@@ -129,7 +131,7 @@ function reducer(state, action) {
         level: getLevel(newXp),
         streak: newStreak,
         lastStudyDate: new Date().toISOString(),
-        completedLessons: { ...state.completedLessons, [courseId]: completed },
+        completedNodes: { ...state.completedNodes, [courseId]: newNodes },
         courseProgress: { ...state.courseProgress, [courseId]: progress },
         totalLessonsCompleted: state.totalLessonsCompleted + 1,
         badges: newBadges,
@@ -187,13 +189,17 @@ export function GameProvider({ children }) {
 
   const earnXp = useCallback((amount) => dispatch({ type: 'EARN_XP', amount }), []);
   const loseHeart = useCallback(() => dispatch({ type: 'LOSE_HEART' }), []);
-  const completeLesson = useCallback((courseId, lessonIndex, xpEarned, perfect, courseLength) => {
-    dispatch({ type: 'COMPLETE_LESSON', courseId, lessonIndex, xpEarned, perfect, courseLength });
+  const completeLesson = useCallback((courseId, nodeIdx, xpEarned, perfect) => {
+    dispatch({ type: 'COMPLETE_LESSON', courseId, nodeIdx, xpEarned, perfect });
   }, []);
   const buyHearts = useCallback(() => dispatch({ type: 'BUY_HEARTS' }), []);
   const buyStreakFreeze = useCallback(() => dispatch({ type: 'BUY_STREAK_FREEZE' }), []);
   const spendGems = useCallback((amount) => dispatch({ type: 'SPEND_GEMS', amount }), []);
   const reset = useCallback(() => dispatch({ type: 'RESET' }), []);
+
+  const isNodeCompleted = useCallback((courseId, nodeIdx) => {
+    return (state.completedNodes?.[courseId] || []).includes(nodeIdx);
+  }, [state.completedNodes]);
 
   const isLessonCompleted = useCallback((courseId, lessonIndex) => {
     const completed = state.completedLessons[courseId] || [];
@@ -222,6 +228,7 @@ export function GameProvider({ children }) {
       buyStreakFreeze,
       spendGems,
       reset,
+      isNodeCompleted,
       isLessonCompleted,
       getCourseProgress,
       isCourseUnlocked,

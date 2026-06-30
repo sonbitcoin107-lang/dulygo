@@ -27,32 +27,22 @@ const ZIGZAG = [
 const SECTION_SIZE = 5;
 
 /**
- * Node status from courseProgress (0-100).
- * Each of the 4 nodes covers 25% of progress.
+ * Node status based on completedNodes — Duolingo-style unlock chain.
+ * node 0 is always active (or completed). node N unlocks only when node N-1 done.
  */
-function getNodeStatus(progress, nodeIdx, courseIdx, prevProgress) {
-  const completedThreshold = (nodeIdx + 1) * 25;
-  const activeThreshold    = nodeIdx * 25;
-
-  if (progress >= completedThreshold) return 'completed';
-
-  // A course is unlocked if it's first OR previous course has any progress
-  const unlocked = courseIdx === 0 || prevProgress > 0;
-  if (!unlocked) return 'locked';
-
-  if (progress >= activeThreshold) return 'active';
+function getNodeStatus(courseId, nodeIdx, isNodeCompleted) {
+  if (isNodeCompleted(courseId, nodeIdx)) return 'completed';
+  if (nodeIdx === 0 || isNodeCompleted(courseId, nodeIdx - 1)) return 'active';
   return 'locked';
 }
 
-function getNodeStars(progress, nodeIdx) {
-  const segment = progress - nodeIdx * 25;
-  if (segment <= 0) return 0;
-  return Math.min(3, Math.ceil(segment / 9));
+function getNodeStars(courseId, nodeIdx, isNodeCompleted) {
+  return isNodeCompleted(courseId, nodeIdx) ? 3 : 0;
 }
 
 export default function Home() {
   const navigate    = useNavigate();
-  const { getCourseProgress } = useGame();
+  const { getCourseProgress, isNodeCompleted } = useGame();
   const [guidebookUnit, setGuidebookUnit] = useState(null);
   const activeRef   = useRef(null);
 
@@ -65,27 +55,27 @@ export default function Home() {
     }
   }, []);
 
-  const handleNodeClick = (course) => {
-    navigate(`/lesson/${course.id}`);
+  const handleNodeClick = (course, nodeIdx) => {
+    const status = getNodeStatus(course.id, nodeIdx, isNodeCompleted);
+    if (status === 'locked') return;
+    navigate(`/lesson/${course.id}/${nodeIdx}`);
   };
 
-  // Called from Guidebook footer button
+  // Called from Guidebook footer button — always start node 0
   const handleStartFromGuidebook = (courseId) => {
-    navigate(`/lesson/${courseId}`);
+    navigate(`/lesson/${courseId}/0`);
   };
 
   return (
     <div className="map-page">
       <div className="map-scroll">
         {COURSES.map((course, courseIdx) => {
-          const progress     = getCourseProgress(course.id);
-          const prevProgress = courseIdx > 0 ? getCourseProgress(COURSES[courseIdx - 1].id) : 100;
-          const sectionNum   = Math.floor(courseIdx / SECTION_SIZE) + 1;
-          const doorNum      = (courseIdx % SECTION_SIZE) + 1;
+          const sectionNum = Math.floor(courseIdx / SECTION_SIZE) + 1;
+          const doorNum    = (courseIdx % SECTION_SIZE) + 1;
 
-          // Is there an active node in this unit (for scroll anchor)?
+          // First active node: lowest nodeIdx that is 'active' (for scroll anchor)
           const firstActiveIdx = [0, 1, 2, 3].findIndex(
-            (ni) => getNodeStatus(progress, ni, courseIdx, prevProgress) === 'active'
+            (ni) => getNodeStatus(course.id, ni, isNodeCompleted) === 'active'
           );
 
           return (
@@ -110,8 +100,8 @@ export default function Home() {
               {/* Node zigzag column */}
               <div className="map-nodes">
                 {[0, 1, 2, 3].map((nodeIdx) => {
-                  const status = getNodeStatus(progress, nodeIdx, courseIdx, prevProgress);
-                  const stars  = getNodeStars(progress, nodeIdx);
+                  const status = getNodeStatus(course.id, nodeIdx, isNodeCompleted);
+                  const stars  = getNodeStars(course.id, nodeIdx, isNodeCompleted);
                   const zz     = ZIGZAG[nodeIdx];
                   const isFirstActive = nodeIdx === firstActiveIdx;
 
@@ -122,7 +112,7 @@ export default function Home() {
                         <PathConnector
                           fromPos={ZIGZAG[nodeIdx - 1].justify}
                           toPos={zz.justify}
-                          done={getNodeStatus(progress, nodeIdx - 1, courseIdx, prevProgress) === 'completed'}
+                          done={isNodeCompleted(course.id, nodeIdx - 1)}
                         />
                       )}
 
@@ -140,7 +130,7 @@ export default function Home() {
                             nodeType={NODE_TYPES[nodeIdx]}
                             status={status}
                             stars={stars}
-                            onClick={() => handleNodeClick(course)}
+                            onClick={() => handleNodeClick(course, nodeIdx)}
                           />
                         </div>
                       </div>

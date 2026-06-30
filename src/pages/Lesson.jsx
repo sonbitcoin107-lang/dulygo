@@ -14,13 +14,20 @@ import './Lesson.css';
 const XP_CORRECT = 10;
 
 export default function Lesson() {
-  const { courseId } = useParams();
+  const { courseId, nodeIdx } = useParams();
   const navigate = useNavigate();
   const { state, loseHeart, completeLesson } = useGame();
 
   const course = getCourseById(courseId);
   const lessons = course?.lessons || [];
-  const totalQuestions = lessons.length;
+
+  // Node-based slicing — Duolingo style
+  const nodeIndex = parseInt(nodeIdx ?? '0');
+  const QUESTIONS_PER_NODE = 6;
+  const startIdx = nodeIndex * QUESTIONS_PER_NODE;
+  const rawSlice = lessons.slice(startIdx, startIdx + QUESTIONS_PER_NODE);
+  const nodeLessons = rawSlice.length ? rawSlice : lessons.slice(startIdx);
+  const totalQuestions = nodeLessons.length;
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answered, setAnswered] = useState(false);
@@ -33,7 +40,7 @@ export default function Lesson() {
   const [noHearts, setNoHearts] = useState(false); // cảnh báo hết tim
   const navTimerRef = useRef(null); // ref để hủy timeout nếu cần
 
-  const currentLesson = lessons[currentIdx];
+  const currentLesson = nodeLessons[currentIdx];
   const progress = ((currentIdx) / totalQuestions) * 100;
 
   const handleAnswer = useCallback((correct) => {
@@ -72,12 +79,13 @@ export default function Lesson() {
     setNoHearts(false);
 
     if (currentIdx + 1 >= totalQuestions) {
-      // Lesson complete!
+      // Node complete!
       const perfect = mistakes === 0;
-      completeLesson(courseId, currentIdx, xpEarned, perfect, totalQuestions);
+      completeLesson(courseId, nodeIndex, xpEarned, perfect);
       navigate('/result', {
         state: {
           courseId,
+          nodeIdx: nodeIndex,
           xpEarned,
           perfect,
           mistakes,
@@ -128,7 +136,7 @@ export default function Lesson() {
       {/* Exercise */}
       <div className="lesson-body" key={currentIdx}>
         <div className="lesson-question-num">
-          Câu {currentIdx + 1}/{totalQuestions}
+          Câu {currentIdx + 1}/{totalQuestions} (Node {nodeIndex + 1})
         </div>
 
         {currentLesson.type === 'multiple_choice' && (
